@@ -83,6 +83,15 @@ public class GameStoreTest {
     }
 
     @Test
+    public void shouldTestIfPlayerNone() {
+
+        String actual = null;
+        String expected = store.getMostPlayer(); // возвращает null согласно описанному методу
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void shouldTestSumPlayTimeOfAllPlayers() {
 
         store.addPlayTime("Petya", 0);
