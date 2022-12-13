@@ -18,9 +18,9 @@ public class Player {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
+//    public String getName() {
+//        return name;
+//    }
 
     /**
      * добавление игры игроку
@@ -100,78 +100,78 @@ public class Player {
         }
         return bestGame;
     }
-
-    public ArrayList<Game> mostPlayerByGenreAlternative(String genre) {
-
-        ArrayList<Game> games = new ArrayList<>();
-
-        for (Game game : playedTime.keySet()) {
-            if (game.getGenre().equals(genre)) {
-                games.add(game);
-            } else {
-                continue;
-            }
-            int mostTime = 0;
-            int gameTime = playedTime.get(game);
-            if (gameTime >= mostTime) {
-                mostTime = gameTime;
-            } else {
-                games.remove(game);
-            }
-        }
-        return games;
-    }
-
-    public ArrayList<Game> mostPlayerByGenreAlternativeOne(String genre) {
-
-        ArrayList<Game> games = new ArrayList<>();
-
-        for (Game game : playedTime.keySet()) {
-            if (game.getGenre().equals(genre)) {
-                games.add(game);
-                int mostTime = 0;
-                int gameTime = playedTime.get(game);
-                if (gameTime >= mostTime) {
-                    mostTime = gameTime;
-                } else {
-                    games.remove(game);
-                }
-            } else {
-                continue;
-            }
-            return games;
-        }
-        if (games.size() == 0) {
-            games.add(null);
-        }
-        return games;
-    }
-
-    public ArrayList<Game> mostPlayerByGenreAlternativeTwo(String genre) {
-
-        ArrayList<Game> games = new ArrayList<>();
-
-        for (Game game : playedTime.keySet()) {
-            if (game.getGenre().equals(genre)) {
-                games.add(game);
-            }
-            if (games.size() == 0) {
-                games.add(null);
-            }
-            if (games.size() > 0) {
-                games.remove(null);
-            } else {
-                continue;
-            }
-            int mostTime = 0;
-            int gamePlay = playedTime.get(game);
-            if (gamePlay >= mostTime) {
-                mostTime = gamePlay;
-
-            } else {
-                games.remove(game);
-            }
-        }
-        return games;
-    }
+//
+//    public ArrayList<Game> mostPlayerByGenreAlternative(String genre) {
+//
+//        ArrayList<Game> games = new ArrayList<>();
+//
+//        for (Game game : playedTime.keySet()) {
+//            if (game.getGenre().equals(genre)) {
+//                games.add(game);
+//            } else {
+//                continue;
+//            }
+//            int mostTime = 0;
+//            int gameTime = playedTime.get(game);
+//            if (gameTime >= mostTime) {
+//                mostTime = gameTime;
+//            } else {
+//                games.remove(game);
+//            }
+//        }
+//        return games;
+//    }
+//
+//    public ArrayList<Game> mostPlayerByGenreAlternativeOne(String genre) {
+//
+//        ArrayList<Game> games = new ArrayList<>();
+//
+//        for (Game game : playedTime.keySet()) {
+//            if (game.getGenre().equals(genre)) {
+//                games.add(game);
+//                int mostTime = 0;
+//                int gameTime = playedTime.get(game);
+//                if (gameTime >= mostTime) {
+//                    mostTime = gameTime;
+//                } else {
+//                    games.remove(game);
+//                }
+//            } else {
+//                continue;
+//            }
+//            return games;
+//        }
+//        if (games.size() == 0) {
+//            games.add(null);
+//        }
+//        return games;
+//    }
+//
+//    public ArrayList<Game> mostPlayerByGenreAlternativeTwo(String genre) {
+//
+//        ArrayList<Game> games = new ArrayList<>();
+//
+//        for (Game game : playedTime.keySet()) {
+//            if (game.getGenre().equals(genre)) {
+//                games.add(game);
+//            }
+//            if (games.size() == 0) {
+//                games.add(null);
+//            }
+//            if (games.size() > 0) {
+//                games.remove(null);
+//            } else {
+//                continue;
+//            }
+//            int mostTime = 0;
+//            int gamePlay = playedTime.get(game);
+//            if (gamePlay >= mostTime) {
+//                mostTime = gamePlay;
+//
+//            } else {
+//                games.remove(game);
+//            }
+//        }
+//        return games;
+//    }
 }
