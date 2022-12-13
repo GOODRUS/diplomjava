@@ -46,7 +46,7 @@ public class GameStore {
     public void addPlayTime(String playerName, int hours) {
         int sum = 0;
         if (playedTime.containsKey(playerName)) {
-            playedTime.put(playerName,playedTime.get(playerName)+hours);
+            playedTime.put(playerName, playedTime.get(playerName) + hours);
         } else {
             playedTime.put(playerName, hours);
         }
@@ -68,6 +68,7 @@ public class GameStore {
         }
         return bestPlayer;
     }
+
 
     /**
      * Суммирует общее количество времени всех игроков, проведённого

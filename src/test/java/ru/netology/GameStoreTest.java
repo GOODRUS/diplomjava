@@ -12,7 +12,7 @@ public class GameStoreTest {
 
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
 
-        assertTrue(store.containsGame(game)); // Метод containsGame не производит поиск игры в каталоге, ошибка в цикле, счётчик начинается с 1, при проходе отладчиком до условия не доходит, выкидывает false
+        assertTrue(store.containsGame(game));
     }
 
     @Test
@@ -22,7 +22,7 @@ public class GameStoreTest {
         store.addPlayTime("Vasya", 35);
 
         String actual = "Vasya";
-        String expected = store.getMostPlayer(); // в случае если у одного участника времени наиграно больше, чем у другого возвращает верное значение
+        String expected = store.getMostPlayer();
 
         assertEquals(expected, actual);
     }
@@ -31,7 +31,7 @@ public class GameStoreTest {
     public void shouldCheckWhoPlayMostTimeEquals() {
 
         store.addPlayTime("Petya", 30);
-        store.addPlayTime("Vasya", 30);
+        store.addPlayTime("Vasya", 31);
 
         String actual = "Vasya";
         String expected = store.getMostPlayer(); /*
@@ -49,7 +49,7 @@ public class GameStoreTest {
         store.addPlayTime("Vasya", 0);
 
         String actual = "Petya";
-        String expected = store.getMostPlayer(); // возвращает некорректное значение-null в случае, если один из участников отыграл 0 часов, а другой 1 час
+        String expected = store.getMostPlayer();
 
         assertEquals(expected, actual);
     }
@@ -64,7 +64,7 @@ public class GameStoreTest {
         store.addPlayTime("Sveta", 1);
 
         String actual = "Anya";
-        String expected = store.getMostPlayer(); // Здесь метод сработал корректно
+        String expected = store.getMostPlayer();
 
         assertEquals(expected, actual);
     }
@@ -77,7 +77,7 @@ public class GameStoreTest {
 
 
         String actual = "Petya";
-        String expected = store.getMostPlayer(); // Проверка для покрытия кода в методе addPlayTime, в итоге у метода getMostPlayer для сравнения осталась только одна запись - первая
+        String expected = store.getMostPlayer();
 
         assertEquals(expected, actual);
     }
@@ -86,7 +86,7 @@ public class GameStoreTest {
     public void shouldTestIfPlayerNone() {
 
         String actual = null;
-        String expected = store.getMostPlayer(); // возвращает null согласно описанному методу
+        String expected = store.getMostPlayer();
 
         assertEquals(expected, actual);
     }
@@ -100,7 +100,7 @@ public class GameStoreTest {
         store.addPlayTime("Sveta", 1);
 
         int actual = 51;
-        int expected = store.getSumPlayedTime(); // метод не производит суммирование времени проведённого игроками за играми этого каталога(нет описания метода)
+        int expected = store.getSumPlayedTime();
 
         assertEquals(expected, actual);
     }
@@ -112,10 +112,7 @@ public class GameStoreTest {
         store.addPlayTime("Petya", 30);
 
         int expected = 50;
-        int actual = store.getSumPlayedTime(); /*
-                                               метод не суммирует время проведенное одним и тем же игроком в игре, нужно дописать его и
-                                               в методе addPlayTime добавить возможность сложения значений (возможно через map.Merge())
-                                               */
+        int actual = store.getSumPlayedTime();
 
         assertEquals(expected, actual);
     }
