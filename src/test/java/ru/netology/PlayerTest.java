@@ -6,12 +6,20 @@ import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
 
+    ru.netology.GameStore store = new ru.netology.GameStore();
+    ru.netology.Game NFS = store.publishGame("NFS", "racing");
+    ru.netology.Player player = new ru.netology.Player("OLO");
+    ru.netology.Game game5 = store.publishGame("Test Drive", "simulator");
+    ru.netology.Game game6 = store.publishGame("NFS", "racing");
+    ru.netology.Game game7 = store.publishGame("Forza5", "simulator");
+    ru.netology.Game game8 = store.publishGame("Fly", "simulator");
+
 
     @Test
     public void shouldGetTimeInTheGame() {
-        GameStore store = new GameStore();
-        Game NFS = store.publishGame("NFS", "racing");
-        Player player = new Player("Alex");
+        ru.netology.GameStore store = new ru.netology.GameStore();
+        ru.netology.Game NFS = store.publishGame("NFS", "racing");
+        ru.netology.Player player = new ru.netology.Player("Alex");
 
         player.installGame(NFS);
 
@@ -22,9 +30,9 @@ public class PlayerTest {
 
     @Test
     public void shouldGetExceptionIfGameIsNotInstall() {
-        GameStore store = new GameStore();
-        Game NFS = store.publishGame("NFS", "racing");
-        Player player = new Player("Alex");
+        ru.netology.GameStore store = new ru.netology.GameStore();
+        ru.netology.Game NFS = store.publishGame("NFS", "racing");
+        ru.netology.Player player = new ru.netology.Player("Alex");
 
         /** специально пропускаем установку игры , ловим исключение */
 
@@ -41,27 +49,31 @@ public class PlayerTest {
 
     @Test
     public void shouldSumPlayTimeIfGamesHaveTheSameGenre() {
-        Player player = new Player("Petya");
-        GameStore store = new GameStore();
-        Game game1 = store.publishGame("Test Drive", "racing");
-        Game game2 = store.publishGame("NFS", "racing");
-        Game game3 = store.publishGame("Forza5", "racing");
-        Game game4 = store.publishGame("Fly", "action");
-        Game game5 = store.publishGame("Fly2", "simulator");
+        ru.netology.Player player = new ru.netology.Player("Petya");
+        ru.netology.GameStore store = new ru.netology.GameStore();
+        ru.netology.Game game1 = store.publishGame("Test Drive", "racing");
+        ru.netology.Game game2 = store.publishGame("NFS", "racing");
+        ru.netology.Game game3 = store.publishGame("Forza5", "racing");
+        ru.netology.Game game4 = store.publishGame("Fly", "action");
+        ru.netology.Game game5 = store.publishGame("Fly2", "simulator");
+        ru.netology.Game game6 = store.publishGame(null, "simulator");
 
-        player.installGameAlternative(game1);
-        player.installGameAlternative(game2);
-        player.installGameAlternative(game3);
-        player.installGameAlternative(game4);
-        player.installGameAlternative(game5);
+        player.installGame(game1);
+        player.installGame(game2);
+        player.installGame(game3);
+        player.installGame(game4);
+        player.installGame(game5);
+        player.installGame(game6);
 
         player.play(game1, 30);
         player.play(game3, 60);
         player.play(game2, 10);
         player.play(game4, 50);
         player.play(game5, 20);
+        player.play(game6, 20);
 
-        int expected = 20;
+
+        int expected = 40;
         int actual = player.sumGenre("simulator");
         assertEquals(expected, actual);
     }
@@ -69,12 +81,12 @@ public class PlayerTest {
 
     @Test
     public void shouldNotRewriteGameTimeIfTheGameWillReinstall() {
-        GameStore store = new GameStore();
-        Player player = new Player("Petya");
-        Game game = store.publishGame("Test Drive", "simulator");
-        Game game2 = store.publishGame("NFS", "simulator");
-        Game game3 = store.publishGame("Forza5", "simulator");
-        Game game4 = store.publishGame("Fly", "simulator");
+        ru.netology.GameStore store = new ru.netology.GameStore();
+        ru.netology.Player player = new ru.netology.Player("Petya");
+        ru.netology.Game game = store.publishGame("Test Drive", "simulator");
+        ru.netology.Game game2 = store.publishGame("NFS", "simulator");
+        ru.netology.Game game3 = store.publishGame("Forza5", "simulator");
+        ru.netology.Game game4 = store.publishGame("Fly", "simulator");
 
         player.installGame(game);
         player.installGame(game2);
@@ -85,7 +97,7 @@ public class PlayerTest {
         player.play(game2, 10);
         player.play(game3, 60);
         player.play(game4, 5);
-        player.installGameAlternative(game4);  /** устанавливаем второй раз - программа должна игнорировать это действие
+        player.installGame(game4);  /** устанавливаем второй раз - программа должна игнорировать это действие
          и не перезаписывать время игры на 0 */
 
         int expected = 100;
@@ -95,13 +107,13 @@ public class PlayerTest {
 
     @Test
     public void shouldShowBestGameInTheGenre() {
-        GameStore store = new GameStore();
-        Player player = new Player("Petya");
+        ru.netology.GameStore store = new ru.netology.GameStore();
+        ru.netology.Player player = new ru.netology.Player("Petya");
 
-        Game game = store.publishGame("Test Drive", "simulator");
-        Game game2 = store.publishGame("NFS", "racing");
-        Game game3 = store.publishGame("Forza5", "simulator");
-        Game game4 = store.publishGame("Fly", "simulator");
+        ru.netology.Game game = store.publishGame("Test Drive", "simulator");
+        ru.netology.Game game2 = store.publishGame("NFS", "racing");
+        ru.netology.Game game3 = store.publishGame("Forza5", "simulator");
+        ru.netology.Game game4 = store.publishGame("Fly", "simulator");
 
         player.installGame(game);
         player.installGame(game2);
@@ -118,13 +130,13 @@ public class PlayerTest {
 
     @Test
     public void shouldReturnNullInCaseNoGameInTheGenre() {
-        GameStore store = new GameStore();
-        Player player = new Player("Petya");
+        ru.netology.GameStore store = new ru.netology.GameStore();
+        ru.netology.Player player = new ru.netology.Player("Petya");
 
-        Game game = store.publishGame("Test Drive", "simulator");
-        Game game2 = store.publishGame("NFS", "racing");
-        Game game3 = store.publishGame("Forza5", "simulator");
-        Game game4 = store.publishGame("Fly", "simulator");
+        ru.netology.Game game = store.publishGame("Test Drive", "simulator");
+        ru.netology.Game game2 = store.publishGame("NFS", "racing");
+        ru.netology.Game game3 = store.publishGame("Forza5", "simulator");
+        ru.netology.Game game4 = store.publishGame("Fly", "simulator");
 
         player.installGame(game);
         player.installGame(game2);
@@ -137,6 +149,47 @@ public class PlayerTest {
         player.play(game4, 5);
 
         assertEquals(null, player.mostPlayerByGenre("arcada"));
+    }
+
+    @Test
+    public void shouldTestEquals() {
+        ru.netology.GameStore store = new ru.netology.GameStore();
+        ru.netology.Player player = new ru.netology.Player("Petya");
+        ru.netology.Player player1 = new ru.netology.Player("Petya");
+        ru.netology.Player player2 = new ru.netology.Player("Petya");
+
+        ru.netology.Game game = store.publishGame("Test Drive", "simulator");
+        ru.netology.Game game2 = store.publishGame("NFS", "racing");
+        ru.netology.Game game3 = store.publishGame("Forza5", "simulator");
+        ru.netology.Game game4 = store.publishGame("NFS MW", "racing");
+        ru.netology.Game game5 = store.publishGame("Test Drive", "simulator");
+        ru.netology.Game game6 = store.publishGame("NFS", "racing");
+        ru.netology.Game game7 = store.publishGame("Forza4", "simulator");
+        ru.netology.Game game8 = store.publishGame("Fly", "simulator");
+
+        player.installGame(game);
+        player.installGame(game2);
+        player.installGame(game3);
+        player.installGame(game4);
+        player.installGame(game5);
+        player.installGame(game6);
+        player.installGame(game7);
+        player.installGame(game8);
+
+        player.play(game, 25);
+        player.play(game2, 10);
+        player.play(game3, 60);
+        player.play(game4, 5);
+        player.play(game5, 25);
+        player.play(game6, 10);
+        player.play(game7, 65);
+        player.play(game8, 60);
+
+        ru.netology.Game expected = game7;
+
+        ru.netology.Game actual = player.mostPlayerByGenre("simulator");
+
+        assertEquals(expected, actual);
     }
 }
 
