@@ -30,7 +30,7 @@ public class GameStore {
      * если игра есть и false иначе
      */
     public boolean containsGame(Game game) {
-        for (int i = 0; i < games.size(); i++) {  // наверное можно было сделать без цикла через : if (games.contains(game)){
+        for (int i = 0; i < games.size(); i++) {
             if (games.get(i).equals(game)) {
                 return true;
             }
@@ -69,16 +69,14 @@ public class GameStore {
         return bestPlayer;
     }
 
-
     /**
      * Суммирует общее количество времени всех игроков, проведённого
      * за играми этого каталога
      */
     public int getSumPlayedTime() {
+
         int sum = 0;
-//        for (Map.Entry player : playedTime.entrySet()) {
-//            sum += (int) player.getValue();
-//        }
+
         for (String playerName : playedTime.keySet()) {
             int time = playedTime.get(playerName);
             sum += time;

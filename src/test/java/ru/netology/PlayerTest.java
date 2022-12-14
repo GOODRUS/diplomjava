@@ -17,6 +17,7 @@ public class PlayerTest {
 
     @Test
     public void shouldGetTimeInTheGame() {
+
         ru.netology.GameStore store = new ru.netology.GameStore();
         ru.netology.Game NFS = store.publishGame("NFS", "racing");
         ru.netology.Player player = new ru.netology.Player("Alex");
@@ -30,11 +31,12 @@ public class PlayerTest {
 
     @Test
     public void shouldGetExceptionIfGameIsNotInstall() {
+
         ru.netology.GameStore store = new ru.netology.GameStore();
         ru.netology.Game NFS = store.publishGame("NFS", "racing");
         ru.netology.Player player = new ru.netology.Player("Alex");
 
-        /** специально пропускаем установку игры , ловим исключение */
+        /** специально пропускаем установку игры, ловим исключение */
 
         boolean thrown = false;
 
@@ -45,7 +47,6 @@ public class PlayerTest {
         }
         assertTrue(thrown);
     }
-
 
     @Test
     public void shouldSumPlayTimeIfGamesHaveTheSameGenre() {
@@ -77,7 +78,6 @@ public class PlayerTest {
         int actual = player.sumGenre("simulator");
         assertEquals(expected, actual);
     }
-
 
     @Test
     public void shouldNotRewriteGameTimeIfTheGameWillReinstall() {
@@ -189,6 +189,30 @@ public class PlayerTest {
 
         ru.netology.Game actual = player.mostPlayerByGenre("simulator");
 
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSumGamePlay() {
+        GameStore store = new ru.netology.GameStore();
+        Player player = new ru.netology.Player("Petya");
+        Game game = store.publishGame("Test Drive", "simulator");
+        Game game2 = store.publishGame("NFS", "simulator");
+        Game game3 = store.publishGame("Forza5", "simulator");
+        Game game4 = store.publishGame("Fly", "simulator");
+
+        player.installGame(game);
+        player.installGame(game2);
+        player.installGame(game3);
+        player.installGame(game4);
+
+        player.play(game, 25);
+        player.play(game, 10);
+        player.play(game, 60);
+        player.play(game, 5);
+
+        int expected = 100;
+        int actual = player.sumGenre("simulator");
         assertEquals(expected, actual);
     }
 }
